@@ -1,0 +1,11 @@
+
+.itemlist, .product-item { margin-top:200px;}
+
+.itemlist .image img{ max-width:100px; }
+
+.col-md-3{ height:120px;}
+
+.itemlist h2{  margin:0;}
+.product-item .price{ font-size:20px; font-weight: bold;}
+.product-item .order{ margin-top:20px;}
+
