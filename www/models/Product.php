@@ -14,6 +14,7 @@ class Product {
     public function __construct() {
 
         $this->db = Db::getConnection();
+        
     }
 
     /**
@@ -25,14 +26,17 @@ class Product {
      */
     public function getProduct($product_id) {
 
-        $result = $this->db->prepare("SELECT id, name, description, price, image FROM product WHERE access = 1 AND id = :product_id");
+        $result = $this->db->prepare("SELECT p.id, u.email, u.phone, concat(u.second_name, ' ', u.first_name, ' ', u.patronymic) as fio, p.name, p.description, p.price, image"
+                . " FROM product p, user u"
+                . " WHERE p.access = 1"
+                . " AND p.id = :product_id"
+                . " AND u.id = p.user_id");
+
         $result->bindParam(':product_id', $product_id, PDO::PARAM_INT);
         $result->execute();
         $result->setFetchMode(PDO::FETCH_ASSOC);
 
-        $result = $result->fetch();
-
-        return $result;
+        return $result->fetch();
     }
 
     /**
@@ -43,10 +47,8 @@ class Product {
      * @return ObjectList
      * @author Алеша
      */
-    public function getProductList($page = 1, $count = self::COUNT_PRODUCT) {
+    public function getProductList($page, $count = self::COUNT_PRODUCT) {
 
-        $page = intval($page);
-        $count = intval($count);
         $offset = ($page - 1) * $count;
 
         $result = $this->db->prepare("SELECT id, name, price, image FROM product WHERE access = 1 ORDER BY id DESC LIMIT :count OFFSET :offset");
@@ -60,30 +62,20 @@ class Product {
 
     /**
      * Description of getProductList
-     * get product list
-     * @param integer $page ( default = 1)
-     * @param integer $count
-     * @return fetchAll
+     * Генерим линки на продукт
+     * @param array $productList
+     * @return array $productList
      * @author Алеша
      */
-    public static function getCount($user_id) {
+    public function setLinkToProductList($productList) {
 
-        $user_id = intval($user_id);
+        $className = strtolower(get_called_class());
 
-        $db = Db::getConnection();
+        foreach ($productList as $key => $item) {
+            $productList[$key]['link'] = DS . $className . DS . $item['id'];
+        }
 
-        $result = $db->prepare("SELECT COUNT(*) as post_count FROM posts WHERE user_id = :user_id");
-        $result->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-        $result->execute();
-        $result->setFetchMode(PDO::FETCH_ASSOC);
-        $result = $result->fetch();
-
-        return $result['post_count'];
-    }
-
-    public static function getLink($product_id) {
-
-        return DS . strtolower(get_called_class()) . DS . $product_id;
+        return $productList;
     }
 
 }

@@ -15,46 +15,40 @@ class ProductController {
     }
 
     public function actionIndex($product_id) {
-
-       /* $user_id = intval(User::getUserIdByLogin($product_id));
-
-        $result = $this->post->getProduct($user_id, $product_id);
-
-        $errors = false;
-
-        if (!count($result)) {
-            $errors[] = "Фото не найдено";
-        }
-
-        include_once ROOT . '/views/product/index.php';*/
-
-        $product_id = intval($product_id);
         
+        $errors = false;
+        
+        $product_id = intval($product_id);
+
         $result = $this->product->getProduct($product_id);
         
+        if (!count($result)) {
+            $errors[] = 'Товар не найдены';
+        }
+        
         include_once ROOT . '/views/product/index.php';
-        
-        
+
         return true;
     }
 
     public function actionList($page = 1) {
 
-        //$user_id = intval(User::getUserIdByLogin($login));
-        //$result = $this->post->getProductList($user_id);
-
         $errors = false;
 
-        /* if (!1) {
-          $errors[] = "У данного пользователя нет фотографий";
-          }
+        $page = intval($page);
 
-          include_once ROOT . '/views/product/list.php'; */
+        $result = $this->product->getProductList($page);
 
-        $result = $this->product->getProductList();
-        
+        if (!count($result)) {
+            $errors[] = 'В магазине товаров нет';
+            goto gotoview;
+        }
+
+        $result = $this->product->setLinkToProductList($result);
+
+        gotoview:
         include_once ROOT . '/views/product/list.php';
-        
+
         return true;
     }
 

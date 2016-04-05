@@ -40,7 +40,7 @@ class UserController {
                 $errors[] = 'Неправильне данные для входна на сайт';
             } else {
                 User::auth($user_id);
-                //header("Location: /account/");
+                header("Location: /account/");
             }
         }
 

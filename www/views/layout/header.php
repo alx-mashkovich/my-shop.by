@@ -71,7 +71,6 @@
                         <?php else: ?>
                             <li><a href="/account/">Account</a></li>
                             <li><a href="/user/logout">Logout</a></li>
-                            <li><a href="/u-<?php echo User::getLoginFromSessionID(); ?>"><?php echo User::getLoginFromSessionID(); ?></a></li>
                         <?php endif; ?>
                            
                     </ul>

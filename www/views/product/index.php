@@ -1,19 +1,12 @@
 <?php include(ROOT . '/views/layout/header.php'); ?>
 
-<?php
-if (isset($errors) && is_array($errors)):
+<?php include(ROOT . '/views/error/errors.php'); ?>
 
-    foreach ($errors as $error) {
-        echo $error . '<br>';
-    }
-else:
-     $link = Product::getLink($result['id']);
-    ?>
     <div class="container">
         <!-- Example row of columns -->
         <div class="row product-item">
             <div class="col-md-9">
-                <h2 class=""><a href="<?php echo $link; ?>"><?php echo $result['name']; ?></a></h2>
+                <h2 class=""><?php echo $result['name']; ?></h2>
                 <div class="image">
                     <img style="width:400px;" src="<?php echo $result['image']; ?>" alt="<?php echo $resilt['name'] ?>" />
                 </div>
@@ -27,9 +20,24 @@ else:
                     <a href="#" class="btn btn-info">Заказать</a>
                 </div>
             </div>
+            
+            <div class="col-md-9">
+                <h3 class="">Контактная информация продавца</h3>
+                <label>Email:</label>
+                <div class="email">
+                    <?php echo $result['email'];?>
+                </div>
+                <label>Телефон:</label>
+                <div class="email">
+                    <?php echo $result['phone'];?>
+                </div>
+                <label>ФИО:</label>
+                <div class="email">
+                    <?php echo $result['fio'];?>
+                </div>
+            </div>
+            
         </div>  
     </div>
-
-<?php endif; ?>
 
 <?php include(ROOT . '/views/layout/footer.php'); ?>
