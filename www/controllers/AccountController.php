@@ -11,20 +11,24 @@ class AccountController{
 
     public function __construct() {
 
-        $this->account = new Account();
+        $this->account = new Account(User::checkLogged());
     }
     
     public function actionIndex($page = 1) {
 
-        $user_id = User::checkLogger();
-        
         $page = intval($page);
         
-        if($page == 0){
+        if($page == 0) {
             $page = 1;
         }
 
-        include_once (ROOT . '/views/account/index.php');
+        $result = $this->account->getProductList($page);
+        
+        if (!count($result)) {
+            $errors[] = 'У вас нет товаров в продаже';
+        }
+
+        include_once ROOT . '/views/account/accountList.php';
     }
     
 

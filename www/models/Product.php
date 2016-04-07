@@ -5,16 +5,15 @@
  *
  * @author Алеша
  */
-class Product {
+class Product implements productInterface{
 
     const COUNT_PRODUCT = 10;
 
-    private $db;
+    protected $db;
 
     public function __construct() {
 
         $this->db = Db::getConnection();
-        
     }
 
     /**

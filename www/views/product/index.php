@@ -1,6 +1,6 @@
 <?php include(ROOT . '/views/layout/header.php'); ?>
 
-<?php include(ROOT . '/views/error/errors.php'); ?>
+<?php include(ROOT . '/views/alerts/errors.php'); ?>
 
     <div class="container">
         <!-- Example row of columns -->

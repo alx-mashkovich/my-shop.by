@@ -8,5 +8,6 @@ return array(
     '^account$|^account/([0-9]+)$' => 'account/index/$1',
     'user/logout' => 'user/logout',
     '^$|^product$' => 'product/list',
+    '^product/deleteAjax/([0-9]+)$' => 'product/deleteAjax/$1',
     '^product/([0-9]+)$' => 'product/index/$1'
 );

@@ -10,7 +10,7 @@ class ProductController {
     protected $product;
 
     public function __construct() {
-
+        
         $this->product = new Product();
     }
 
@@ -50,6 +50,11 @@ class ProductController {
         include_once ROOT . '/views/product/list.php';
 
         return true;
+    }
+    
+    public function actionDeleteAjax($product_id){
+        
+        echo "action delete ajax";
     }
 
 }

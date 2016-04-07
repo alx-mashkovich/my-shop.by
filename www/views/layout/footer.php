@@ -12,5 +12,19 @@
     <script src="/template/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/template/js/ie10-viewport-bug-workaround.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.product-delete').click(function(){
+                var id = $(this).data("id");
+                var el = $(this);
+                $.post("/product/deleteAjax/" + id, {}, function(data){
+                    var el_count = el.parent().find('.product-count span');
+                    var count = parseInt(el_count.html());
+                    el_count.html(count - 1);
+                });
+                return false;
+            });
+        });
+    </script>
   </body>
 </html>

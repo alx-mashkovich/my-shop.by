@@ -25,7 +25,7 @@ class UserController {
             $password = $_POST['password'];
 
             $errors = false;
-
+                    
             if (!$this->user->checkEmail($email)) {
                 $errors[] = 'Неправильный email';
             }
@@ -34,14 +34,17 @@ class UserController {
                 $errors[] = 'Пароль не должен быть короче 6-ти символов';
             }
 
-            $user_id = $this->user->checkUserData($email, $password);
+            if($errors == false){
+               $user_id = $this->user->checkUserData($email, $password);
 
-            if ($user_id == false) {
-                $errors[] = 'Неправильне данные для входна на сайт';
-            } else {
-                User::auth($user_id);
-                header("Location: /account/");
+                if ($user_id == false) {
+                    $errors[] = 'Неправильне данные для входа на сайт';
+                } else {
+                    User::auth($user_id);
+                    header("Location: /account/");
+                } 
             }
+            
         }
 
         include_once(ROOT . '/views/user/login.php');
@@ -78,7 +81,7 @@ class UserController {
                 $errors[] = 'Пароль не должен быть короче 6-ти символов';
             }
             
-            if (!is_array($errors)) {
+            if ($errors == false) {
                 if(!$this->user->checkUserData($email, $password)){
                     if (!$this->user->registration($email, $password, $first_name, $second_name, $patronymic, $phone)) {
                       $errors[] = 'Ошибка при регистрации!';

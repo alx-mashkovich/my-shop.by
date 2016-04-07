@@ -5,11 +5,8 @@
         <group>
             <file>file:/Z:/home/my-shop.by/www/controllers/ProductController.php</file>
             <file>file:/Z:/home/my-shop.by/www/controllers/AccountController.php</file>
-            <file>file:/Z:/home/my-shop.by/www/views/product/index.php</file>
+            <file>file:/Z:/home/my-shop.by/www/views/account/accountList.php</file>
             <file>file:/Z:/home/my-shop.by/www/models/Account.php</file>
-            <file>file:/Z:/home/my-shop.by/www/install/sql.php</file>
-            <file>file:/Z:/home/my-shop.by/www/models/Product.php</file>
-            <file>file:/Z:/home/my-shop.by/www/views/product/list.php</file>
         </group>
     </open-files>
 </project-private>
