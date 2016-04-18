@@ -76,11 +76,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   `patronymic` varchar(50) DEFAULT NULL,
   `phone` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `email_2` (`email`),
-  KEY `email_3` (`email`),
-  KEY `email_4` (`email`),
-  KEY `password_2` (`password`),
-  KEY `password_3` (`password`),
   KEY `email_password` (`email`,`password`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
